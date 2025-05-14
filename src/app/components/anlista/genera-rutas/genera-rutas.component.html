@@ -1,0 +1,50 @@
+<div class="generate-container">
+  <ng-container *ngIf="!isGenerating && !isComplete">
+    <div class="content">
+<div class="route-animation">
+  <svg viewBox="0 0 300 150" class="route-svg" preserveAspectRatio="xMidYMid meet">
+    <!-- Línea curva del camino -->
+    <path id="routePath" d="M20,100 Q90,20 150,100 T280,100" stroke="#00236B" stroke-width="6" fill="none" stroke-linecap="round"/>
+    
+    <!-- Pin animado -->
+    <circle r="8" fill="#00236B">
+      <animateMotion repeatCount="indefinite" dur="3s" rotate="auto">
+        <mpath href="#routePath" />
+      </animateMotion>
+    </circle>
+  </svg>
+</div>
+      <h1>Genera rutas personalizadas</h1>
+      <p>
+        Presiona el botón para procesar la información y generar rutas de aprendizaje personalizadas
+        para cada trabajador.
+      </p>
+      <button (click)="handleGeneratePaths()" class="btn-main">
+        Generar rutas de aprendizaje
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isGenerating && !isComplete">
+    <div class="loading">
+      <div class="loader">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+      <h2>Generando rutas de aprendizaje</h2>
+      <p class="animated">{{ currentMessage }}</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isComplete">
+    <div class="complete">
+      <div class="check-icon">✔</div>
+      <h2>¡Proceso completado con éxito!</h2>
+      <p>La información ha sido procesada correctamente.</p>
+      <div class="buttons">
+        <button (click)="goToRoutes()" class="btn-main">Ir a Rutas Activas</button>
+        <button (click)="reset()" class="btn-outline">Aceptar</button>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,32 @@
+<div class="login-html">
+<img src="assets/img/logo_SBS.svg" alt="Logo SBS" class="logo">
+<div class="login-container">
+  <div class="login-box">
+    <div class="login-left">
+      
+      <h1>Bienvenido</h1>
+      <p class="subtitle">Administra las rutas de<br>aprendizaje</p>
+      <p class="note">Recuerda que el ingreso es con tu usuario institucional</p>
+    </div>
+
+    <form class="login-right" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <label for="username">Usuario Administrativo</label>
+      <div class="input-group">
+        <img src="assets/img/login_user.svg" class="icon" alt="Usuario">
+        <input id="username" type="text" formControlName="username" />
+      </div>
+
+      <label for="password">Contraseña</label>
+      <div class="input-group">
+        <img src="assets/img/login_password.svg" class="icon" alt="Contraseña">
+        <input id="password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+        <img src="assets/img/login_eye.svg" class="icon eye" (click)="togglePassword()" alt="Mostrar/Ocultar">
+      </div>
+
+      <a class="forgot-password" href="#">¿Olvidaste tu contraseña?</a>
+
+      <button type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+    </form>
+  </div>
+</div>
+</div>

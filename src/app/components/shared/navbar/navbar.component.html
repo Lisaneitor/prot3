@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <img src="assets/img/logo_SBS.svg" class="logo" alt="Logo SBS">
+  </div>
+
+  <ul class="navbar-menu">
+    <li *ngFor="let item of menuOptions" routerLinkActive="active" [routerLink]="item.path">
+      {{ item.label }}
+    </li>
+  </ul>
+
+  <div class="navbar-right" (click)="toggleMenu()">
+  <span>Bienvenido, {{ username }}</span>
+  <img src="assets/img/user_icon.svg" class="avatar" alt="Usuario">
+
+  <div class="dropdown" *ngIf="menuOpen">
+    <ul>
+      <li (click)="vercuenta()"><img src="assets/img/ver_cuenta.svg"> Ver cuenta</li>
+      <li><img src="assets/img/ayuda.svg"> Ayuda</li>
+      <li (click)="logout()"><img src="assets/img/cerrar_sesion.svg"> Cerrar sesión</li>
+    </ul>
+  </div>
+</div>
+
+</nav>

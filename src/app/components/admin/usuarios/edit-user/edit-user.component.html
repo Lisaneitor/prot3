@@ -1,0 +1,45 @@
+<div class="user-form-container">
+  <h2>Editar usuario</h2>
+  <form [formGroup]="userForm" (ngSubmit)="actualizarUsuario()">
+    <div class="form-field">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" formControlName="name" />
+    </div>
+
+    <!-- Campo de contraseña con botón para mostrar/ocultar -->
+    <div class="form-field password-wrapper">
+      <label for="password">Contraseña</label>
+      <div class="password-container">
+        <input
+          [type]="mostrarPassword ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'input-invalid': userForm.controls['password'].invalid && userForm.controls['password'].touched
+          }"
+        />
+        <button type="button" class="toggle-password" (click)="mostrarPassword = !mostrarPassword">
+          <img src="assets/img/login_eye.svg" class="icon eye" alt="Mostrar/Ocultar">
+        </button>
+      </div>
+      <div class="error-message" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+        <small *ngIf="userForm.controls['password'].errors?.['required']">La contraseña es obligatoria.</small>
+        <small *ngIf="userForm.controls['password'].errors?.['minlength']">Debe tener al menos 6 caracteres.</small>
+        <small *ngIf="userForm.controls['password'].errors?.['maxlength']">No debe superar los 50 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="role">Rol</label>
+      <select id="role" formControlName="role">
+        <option [value]="'ADMIN'">Administrador</option>
+        <option [value]="'COLLABORATOR'">Analista</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="userForm.invalid">Aceptar</button>
+    </div>
+  </form>
+</div>

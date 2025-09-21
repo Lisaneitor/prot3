@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollaboratorRolesService } from '../../../service/collaborator-roles.service';
 
 @Component({
   selector: 'app-carga-archivos',
@@ -12,7 +13,10 @@ export class CargaArchivosComponent {
   isDragging = false;
   emailCount: number | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private collaboratorRolesService: CollaboratorRolesService
+  ) {}
 
   handleFileChange(event: any): void {
     const selectedFile = event.target.files[0];
@@ -47,7 +51,6 @@ export class CargaArchivosComponent {
     }
 
     this.file = file;
-    this.emailCount = Math.floor(Math.random() * 300) + 50; // Simulación
   }
 
   openFileInput(fileInput: HTMLInputElement): void {
@@ -57,8 +60,36 @@ export class CargaArchivosComponent {
   handleUpload(): void {
     if (!this.file) return;
 
-    alert(`Archivo "${this.file.name}" cargado exitosamente con ${this.emailCount} correos.`);
-    this.router.navigate(['/analyst/generate']);
+    this.collaboratorRolesService.uploadCsv(this.file).subscribe({
+      next: (res) => {
+        alert(res.message || 'Archivo cargado correctamente');
+        this.router.navigate(['/admin/oferta']);
+      },
+      error: (err) => {
+        console.error('Error al cargar archivo:', err);
+        alert(err?.error?.message || 'Error al cargar archivo');
+      }
+    });
   }
+  
+descargarPlantilla(): void {
+  this.collaboratorRolesService.getCsvFormat().subscribe({
+    next: (res) => {
+      const csvContent = res.data;
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'plantilla_informacion.csv';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    },
+    error: (err) => {
+      console.error('Error al descargar plantilla:', err);
+      alert('No se pudo obtener la plantilla. Intenta nuevamente.');
+    }
+  });
+}
 
 }

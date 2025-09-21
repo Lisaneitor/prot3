@@ -1,1 +1,69 @@
-<p>rutas-activas works!</p>
+<div class="app-rutas">
+<div class="rutas-header">
+    <div class="title-search">
+  <h1 class="rutas-title">Rutas</h1>
+  <div class="rutas-controls">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="filtrarRutas()"
+      placeholder="Buscar"
+      class="rutas-search"
+    />
+    </div>
+    </div>
+    <button class="rutas-download" (click)="descargarRutas()">
+      <img src="assets/img/download_csv.svg" alt="Descargar" width="16" /> Descargar
+    </button>
+  
+</div>
+
+<ng-template #courseTemplate let-row="row">
+  <div [innerHTML]="row.courseNames"></div>
+</ng-template>
+
+<ngx-datatable 
+  class="rutas-table material"
+  [rows]="filteredRutas"
+  [columns]="columns"
+  [columnMode]="'standard'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [limit]="selectedPageSize"
+>
+  <ngx-datatable-column name="ID" prop="id" [width]="60"></ngx-datatable-column>
+  <ngx-datatable-column name="Colaborador ID" prop="collaboratorId" [width]="180"></ngx-datatable-column>
+  <ngx-datatable-column name="Cursos recomendados" prop="courseNames" [width]="600">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div [innerHTML]="row.courseNames"></div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Total horas" prop="totalHours" [width]="120"></ngx-datatable-column>
+  <ngx-datatable-column name="Fecha" prop="createdDate" [width]="180">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ formatFecha(row.createdDate) }}
+  </ng-template>
+</ngx-datatable-column>
+  <ngx-datatable-column name="Acciones" [width]="150">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div class="rutas-acciones">
+        <button class="button" (click)="verRuta(row.id)">
+          <img src="assets/img/edit.svg" alt="Editar" width="18"  />
+        </button>
+        <button class="button" (click)="eliminarRuta(row.id)">
+          <img src="assets/img/trash.svg" alt="Eliminar" width="18" />
+        </button>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+
+</ngx-datatable>
+<div class="page-size-control">
+  <label for="pageSize">Mostrar:</label>
+  <select id="pageSize" [(ngModel)]="selectedPageSize">
+    <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+  </select>
+</div>
+</div>

@@ -1,0 +1,67 @@
+.app-rutas{
+      display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.ruta-detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 90%;
+}
+
+.ruta-detalle-header h2 {
+  margin: 0;
+}
+
+.ruta-table {
+  width: 75%;
+  border-collapse: collapse;
+}
+
+.ruta-table th, .ruta-table td {
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  text-align: left;
+}
+
+.footer-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.cancel-btn, .save-btn, .add-btn, .back-btn {
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: var(--turquesa);
+  color: white;
+  border-color: var(--turquesa);
+}
+.usuarios-add {
+  background-color: var(--turquesa);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.usuarios-add:hover {
+  background-color: #00a497;
+}

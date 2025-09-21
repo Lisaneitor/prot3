@@ -9,7 +9,7 @@ import { AuthService } from '../../../service/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  @Input() role: 'analista' | 'admin' = 'analista';
+  @Input() role: 'COLLABORATOR' | 'ADMIN' = 'COLLABORATOR';
   @Input() username: string = 'Cris';
 
   menuOptions: { label: string, path: string }[] = [];
@@ -18,7 +18,7 @@ export class NavbarComponent {
   constructor(private authService: AuthService,private router: Router) {}
 
   ngOnInit(): void {
-    this.menuOptions = this.role === 'analista'
+    this.menuOptions = this.role === 'COLLABORATOR'
       ? [
           { label: 'Carga de archivos', path: '/analista/archivos' },
           { label: 'Generar rutas', path: '/analista/generar' },
@@ -27,7 +27,7 @@ export class NavbarComponent {
       : [
           { label: 'Gestión de usuarios', path: '/admin/usuarios' },
           { label: 'Oferta formativa', path: '/admin/oferta' },
-          { label: 'Roles y competencias', path: '/admin/roles' }
+          { label: 'Autoevaluación de competencias', path: '/admin/roles' }
         ];
   }
 

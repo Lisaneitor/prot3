@@ -1,0 +1,40 @@
+<div class="app-rutas">
+<div class="ruta-detalle-header">
+  <button class="back-btn" (click)="cancelar()">
+    <img src="assets/img/back.svg" alt="Atras" width="20" />
+  </button>
+  <h2>Editar ruta {{ rutaId }}</h2>
+  <button class="usuarios-add" (click)="addCurso()">
+    <img src="assets/img/add_user.svg" alt="Añadir" width="16" /> Añadir
+  </button></div>
+
+<table class="ruta-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Horas</th>
+      <th>Tecnología</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursos; let i = index">
+      <td>{{ curso.offerName }}</td>
+      <td>{{ curso.offerType }}</td>
+      <td>{{ curso.durationHours }}</td>
+      <td>{{ curso.technology }}</td>
+      <td>
+      <button (click)="eliminarCurso(i)">
+        <img src="assets/img/trash.svg" alt="Eliminar" width="18" />
+      </button>      
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer-buttons">
+  <button class="cancel-btn" (click)="cancelar()">Cancelar</button>
+  <button class="save-btn" (click)="guardar()">Guardar</button>
+</div>
+</div>

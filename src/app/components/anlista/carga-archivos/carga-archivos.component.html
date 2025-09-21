@@ -1,12 +1,14 @@
 <div class="upload-container">
-  <h1 class="title">Lista de correos</h1>
+  <h1 class="title">Información colaboradores</h1>
 
-  <div class="upload-box"
-       [class.dragging]="isDragging"
-       (dragover)="handleDragOver($event)"
-       (dragleave)="handleDragLeave()"
-       (drop)="handleDrop($event)">
-
+  <div
+    class="upload-box"
+    [class.dragging]="isDragging"
+    (click)="openFileInput(fileInput)"
+    (dragover)="handleDragOver($event)"
+    (dragleave)="handleDragLeave()"
+    (drop)="handleDrop($event)"
+  >
     <ng-container *ngIf="!file; else uploadedFile">
       <div class="icon-box">
         <img src="assets/img/upload_doc.svg" alt="Upload" width="48">
@@ -15,8 +17,6 @@
         <h3 class="subtitle">Subir archivo</h3>
         <p class="instruction">Formato aceptado: .csv</p>
       </div>
-    
-      
     </ng-container>
 
     <ng-template #uploadedFile>
@@ -24,18 +24,30 @@
         <img src="assets/img/document.svg" width="32" class="mr-2" alt="Archivo">
         <div>
           <p class="filename">{{ file?.name }}</p>
-          <p class="count">{{ emailCount }} correos registrados</p>
         </div>
       </div>
-      <button class="btn mt" (click)="handleUpload()">Cargar archivo</button>
     </ng-template>
+  </div>
+
+  <input #fileInput type="file" accept=".csv" hidden (change)="handleFileChange($event)">
+
+  <div class="note-container">
+    <div>
+        <p class="note-bold">¿Tienes dudas de cómo subir el archivo?</p>
+        <p class="note">
+        Descarga la plantilla para subir correctamente la información
+        </p>
+    </div>
+<button class="btn-download" (click)="descargarPlantilla()">
+  <img src="assets/img/download_csv.svg" alt="Descargar" width="16" />
+  Descargar plantilla
+</button>
 
   </div>
-  
-  <input #fileInput type="file" accept=".csv" hidden (change)="handleFileChange($event)">
-      <p class="note"><img src="assets/img/info.svg" alt="Informacion">
+        <p class="note"><img src="assets/img/info.svg" alt="Informacion">
         Para generar la ruta de aprendizaje, sube la lista de correos de los empleados a
         los cuales se les desea asignar la ruta.
       </p>
-  <button class="btn" (click)="openFileInput(fileInput)">Cargar archivo</button>
+
+<button class="btn" [disabled]="!file" [ngClass]="{'enabled': file}" (click)="handleUpload()">Cargar archivo</button>
 </div>

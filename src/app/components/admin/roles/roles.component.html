@@ -1,1 +1,49 @@
-<p>roles works!</p>
+<div class="upload-container">
+  <h1 class="title">Autoevaluación de competencias</h1>
+
+  <div
+    class="upload-box"
+    [class.dragging]="isDragging"
+    (click)="openFileInput(fileInput)"
+    (dragover)="handleDragOver($event)"
+    (dragleave)="handleDragLeave()"
+    (drop)="handleDrop($event)"
+  >
+    <ng-container *ngIf="!file; else uploadedFile">
+      <div class="icon-box">
+        <img src="assets/img/upload_doc.svg" alt="Upload" width="48">
+      </div>
+      <div>
+        <h3 class="subtitle">Subir archivo</h3>
+        <p class="instruction">Formato aceptado: .csv</p>
+      </div>
+    </ng-container>
+
+    <ng-template #uploadedFile>
+      <div class="uploaded-info">
+        <img src="assets/img/document.svg" width="32" class="mr-2" alt="Archivo">
+        <div>
+          <p class="filename">{{ file?.name }}</p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <input #fileInput type="file" accept=".csv" hidden (change)="handleFileChange($event)">
+
+  <div class="note-container">
+    <div>
+        <p class="note-bold">¿Tienes dudas de cómo subir el archivo?</p>
+        <p class="note">
+        Descarga la plantilla para subir correctamente la información
+        </p>
+    </div>
+<button class="btn-download" (click)="descargarPlantilla()">
+  <img src="assets/img/download_csv.svg" alt="Descargar" width="16" />
+  Descargar plantilla
+</button>
+
+  </div>
+
+<button class="btn" [disabled]="!file" [ngClass]="{'enabled': file}" (click)="handleUpload()">Cargar archivo</button>
+</div>

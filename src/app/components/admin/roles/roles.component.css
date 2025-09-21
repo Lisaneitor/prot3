@@ -1,0 +1,134 @@
+.upload-container {
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 28px;
+  color: #001E6B;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.upload-box {
+  border: 2px dashed #01C4B3;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  background-color: #f4f6f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-box.dragging {
+  background-color: #e0f7fa;
+  border-color: #01C4B3;
+}
+
+.icon-box {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.subtitle {
+  color: #001E6B;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 0.5rem;
+}
+
+.instruction,
+.note {
+  font-size: 14px;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.uploaded-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.filename {
+  color: #001E6B;
+  font-weight: bold;
+  margin: 0;
+}
+
+.count {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Botón deshabilitado (cuando no hay archivo) */
+.btn {
+  margin-top: 2rem;
+  background-color: white;
+  border: 1.5px solid #ccc;
+  color: #ccc;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.btn.enabled {
+  background-color: #01C4B3;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.download-section {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.download-text {
+  font-size: 14px;
+  color: #001E6B;
+  font-weight: bold;
+}
+
+.btn-download {
+  background-color: #01C4B3;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.btn-download:hover {
+  background-color: #00b3a3;
+}
+
+.note-container{
+    display: flex;
+}

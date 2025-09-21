@@ -1,0 +1,32 @@
+<div class="ruta-detalle-header">
+  <button class="back-btn" (click)="cancelar()">←</button>
+  <h2>Añadir oferta formativa</h2>
+</div>
+
+<form class="formulario">
+  <label>Nombre de Oferta</label>
+  <select [(ngModel)]="selectedOfferId" name="offer" (change)="onSelectChange()">
+    <option *ngFor="let offer of filteredOffers" [value]="offer.offerId">
+      {{ offer.offerName }}
+    </option>
+  </select>
+
+  <small class="info">ℹ Estos campos no son editables, son únicamente informativos</small>
+
+  <label>Tipo</label>
+  <input [value]="selectedOffer?.offerType || ''" disabled />
+
+  <label>Plataforma</label>
+  <input [value]="selectedOffer?.platform || ''" disabled />
+
+  <label>Horas</label>
+  <input [value]="selectedOffer?.durationHours || ''" disabled />
+
+  <label>Tecnología</label>
+  <input [value]="selectedOffer?.technology || ''" disabled />
+</form>
+
+<div class="footer-buttons">
+  <button class="cancel-btn" (click)="cancelar()">Cancelar</button>
+  <button class="save-btn" (click)="aceptar()">Aceptar</button>
+</div>

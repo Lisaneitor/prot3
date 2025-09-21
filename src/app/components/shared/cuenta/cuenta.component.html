@@ -1,0 +1,25 @@
+<div class="cuenta-container">
+  <div class="cuenta-header">
+    <button class="back-btn" (click)="goToInicio()">
+      <img src="assets/img/back.svg" alt="Volver" />
+    </button>
+    <img src="assets/img/user_icon.svg" class="user-icon" alt="Avatar" />
+  </div>
+
+  <form *ngIf="userData" class="cuenta-form">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" [value]="userData.name" disabled />
+    </div>
+
+    <div class="form-group">
+      <label>Puesto</label>
+      <input type="text" [value]="userData.role === 'ADMIN' ? 'Administrador' : 'Analista en RRHH'" disabled />
+    </div>
+
+    <div class="form-buttons">
+      <button class="btn-outline" (click)="goToInicio()">Cancelar</button>
+      <button class="btn-fill" disabled>Guardar</button>
+    </div>
+  </form>
+</div>

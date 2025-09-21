@@ -16,7 +16,11 @@
   <div class="dropdown" *ngIf="menuOpen">
     <ul>
       <li (click)="vercuenta()"><img src="assets/img/ver_cuenta.svg"> Ver cuenta</li>
-      <li><img src="assets/img/ayuda.svg"> Ayuda</li>
+      <li>
+        <a href="assets/template/ayuda.pdf" target="_blank" rel="noopener" class="dropdown-link">
+          <img src="assets/img/ayuda.svg" /> <span>Ayuda</span>
+        </a>
+      </li>
       <li (click)="logout()"><img src="assets/img/cerrar_sesion.svg"> Cerrar sesión</li>
     </ul>
   </div>

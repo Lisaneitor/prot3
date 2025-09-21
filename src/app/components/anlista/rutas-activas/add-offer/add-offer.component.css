@@ -1,0 +1,44 @@
+.formulario {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario label {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.formulario input,
+.formulario select {
+  padding: 8px;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.info {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #003366;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.cancel-btn, .save-btn {
+  padding: 10px 25px;
+  border-radius: 6px;
+  border: 2px solid teal;
+  font-weight: bold;
+}
+
+.save-btn {
+  background-color: teal;
+  color: white;
+}

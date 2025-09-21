@@ -12,7 +12,7 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginComponent {
   private loggedIn = false;
-  private role: 'analista' | 'admin' | null = null;
+  private role: 'COLLABORATOR' | 'ADMIN' | null = null;
   private username: string = '';
   loginForm: FormGroup;
   hidePassword = true;
@@ -30,20 +30,33 @@ export class LoginComponent {
     this.hidePassword = !this.hidePassword;
   }
 
-  onLogin() {
-    const { username, password } = this.loginForm.value;
+// src/app/components/login/login.component.ts
+onLogin() {
+  const { username, password } = this.loginForm.value;
 
-    // Simulación: validación simple según rol
-    if (username === 'admin' && password === 'admin123') {
-      this.router.navigate(['/admin']);
-    this.authService.login('admin', 'admin');
-    } else if (username === 'analista' && password === 'analista123') {
-      this.router.navigate(['/analista']);
-    this.authService.login('analista', 'analista');
-    } else {
-      alert('Credenciales incorrectas');
+  this.authService.login(username, password).subscribe({
+    next: (res) => {
+      const role = res.data.user.role.toLowerCase();
+
+      if (role === 'admin') {
+        this.router.navigate(['/admin']);
+      } else if (role === 'collaborator') {
+        this.router.navigate(['/analista']);
+      } else {
+        alert('Rol no reconocido');
+      }
+        //console.log('Rol actual:', role);
+
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Credenciales inválidas');
     }
-  }
+  });
+  
+}
+
+
   isLoggedIn() {
     return this.loggedIn;
   }

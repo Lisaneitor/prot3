@@ -1,1 +1,54 @@
-<p>usuarios works!</p>
+<div class="app-usuarios">
+<div class="usuarios-header">
+  <div class="title-search">
+    <h1 class="usuarios-title">Usuarios</h1>
+    <div class="usuarios-controls">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="filtrarUsuarios()"
+        placeholder="Buscar"
+        class="usuarios-search"
+      />
+    </div>
+  </div>
+
+  <button class="usuarios-add" (click)="addUser()">
+    <img src="assets/img/add_user.svg" alt="Añadir" width="16" /> Añadir
+  </button>
+  
+</div>
+
+<ngx-datatable
+  class="usuarios-table material"
+  [rows]="filteredUsers"
+  [columnMode]="'standard'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [limit]="5"
+>
+  <ngx-datatable-column name="ID" prop="userId" [width]="60"></ngx-datatable-column>
+  <ngx-datatable-column name="Nombre" prop="name" [width]="240"></ngx-datatable-column>
+  <ngx-datatable-column name="Correo" prop="email" [width]="300"></ngx-datatable-column>
+  <ngx-datatable-column name="Rol" prop="role" [width]="240">
+  <ng-template let-row="row" ngx-datatable-cell-template>
+    {{ traducirRol(row.role) }}
+  </ng-template>
+</ngx-datatable-column>
+
+  <ngx-datatable-column name="Acciones" [width]="120">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="usuarios-acciones">
+      <button class="button" (click)="editarUsuario(row.userId)">
+        <img src="assets/img/edit.svg" alt="Editar" width="18"  />
+      </button>
+      <button class="button" (click)="eliminarUsuario(row.userId)">
+        <img src="assets/img/trash.svg" alt="Eliminar" width="18" />
+      </button>
+    </div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+</div>

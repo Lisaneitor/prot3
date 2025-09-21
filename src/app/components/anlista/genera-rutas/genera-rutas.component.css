@@ -63,10 +63,23 @@ button {
 }
 
 .btn-outline {
-  background: white;
-  border: 2px solid #001E6B;
-  color: #001E6B;
+  border: 2px solid #00236B;
+  background: #fff;            /* por defecto: deshabilitado look */
+  color: #00236B;
+  cursor: not-allowed;
+  opacity: 0.6;
   margin-left: 10px;
+}
+.btn-main.enabled {
+  background: #00236B;         /* habilitado */
+  color: #fff;
+  cursor: pointer;
+  opacity: 1;
+  margin-left: 10px;
+}
+
+.btn-main.enabled:hover {
+  filter: brightness(0.95);
 }
 
 @keyframes spin {

@@ -144,6 +144,4 @@ getBaseRoute(): string {
   const role = this.getRole();
   return role === 'ADMIN' ? 'admin' : 'analista';
 }
-
-
 }

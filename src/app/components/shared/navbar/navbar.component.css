@@ -9,7 +9,8 @@
 }
 
 .navbar-left .logo {
-  height: 50px;
+  height: 40px;
+  margin-right: 2rem;
 }
 
 .navbar-menu {
@@ -18,6 +19,18 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.navbar.disabled {
+  pointer-events: none;   /* bloquea click, scroll, hover */
+  opacity: 0.6;           /* feedback visual */
+}
+
+/* (Opcional) Si prefieres bloquear solo el menú central */
+.navbar-menu.disabled { pointer-events: none; opacity: 0.5; }
+
+.link-disabled {
+  cursor: not-allowed;
 }
 
 .navbar-menu li {

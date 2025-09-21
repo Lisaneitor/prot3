@@ -81,5 +81,5 @@ input[disabled] {
   padding: 0.5rem 2rem;
   border-radius: 6px;
   font-weight: bold;
-  cursor: not-allowed;
+  cursor: pointer;
 }

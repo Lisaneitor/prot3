@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollaboratorRolesService } from '../../../service/collaborator-roles.service';
+import { UploadStateService } from '../../../service/upload-state.service';
 
 @Component({
   selector: 'app-carga-archivos',
@@ -15,7 +16,8 @@ export class CargaArchivosComponent {
 
   constructor(
     private router: Router,
-    private collaboratorRolesService: CollaboratorRolesService
+    private collaboratorRolesService: CollaboratorRolesService,
+    private uploadStateService: UploadStateService
   ) {}
 
   handleFileChange(event: any): void {
@@ -62,10 +64,12 @@ export class CargaArchivosComponent {
 
     this.collaboratorRolesService.uploadCsv(this.file).subscribe({
       next: (res) => {
+      this.uploadStateService.markUploaded(true);
         alert(res.message || 'Archivo cargado correctamente');
-        this.router.navigate(['/admin/oferta']);
+        this.router.navigate(['/analista/generar']);
       },
       error: (err) => {
+      this.uploadStateService.markUploaded(false);
         console.error('Error al cargar archivo:', err);
         alert(err?.error?.message || 'Error al cargar archivo');
       }

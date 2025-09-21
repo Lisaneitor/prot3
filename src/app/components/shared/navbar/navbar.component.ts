@@ -1,6 +1,7 @@
 import { Component, Input, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
+import { ProcessStateService } from '../../../service/process-state.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +15,16 @@ export class NavbarComponent {
 
   menuOptions: { label: string, path: string }[] = [];
   menuOpen = false;
+  isDisabled = false;
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(private authService: AuthService,
+    private processState: ProcessStateService,
+    private router: Router) {}
 
   ngOnInit(): void {
+    this.processState.isProcessing$.subscribe(
+    (val) => (this.isDisabled = val)
+  );
     this.menuOptions = this.role === 'COLLABORATOR'
       ? [
           { label: 'Carga de archivos', path: '/analista/archivos' },
@@ -42,5 +49,9 @@ export class NavbarComponent {
   
   vercuenta() {
     this.router.navigate(['cuenta']);
+  }
+    get isAnalyst(): boolean {
+    // En tu AuthService definiste 'COLLABORATOR' para analista
+    return this.role === 'COLLABORATOR';
   }
 }

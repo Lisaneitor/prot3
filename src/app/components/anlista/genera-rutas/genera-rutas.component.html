@@ -19,7 +19,13 @@
         Presiona el botón para procesar la información y generar rutas de aprendizaje personalizadas
         para cada trabajador.
       </p>
-      <button (click)="handleGeneratePaths()" class="btn-main">
+
+      <button
+        (click)="onGenerateClick()"
+        class="btn-main"
+        [class.enabled]="canGenerate"
+        [attr.aria-disabled]="!canGenerate"
+      >
         Generar rutas de aprendizaje
       </button>
     </div>

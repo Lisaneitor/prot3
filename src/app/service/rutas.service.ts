@@ -19,7 +19,7 @@ export interface Ruta {
 })
 export class RutasService {
 
-  private apiUrl = 'http://localhost:8080/api/recommended-learning-paths';
+  private apiUrl = '/api/recommended-learning-paths';
 
   constructor(private http: HttpClient) {}
 

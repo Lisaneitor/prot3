@@ -7,7 +7,7 @@ import { Observable, switchMap, map } from 'rxjs';
 })
 export class RecommendationService {
 
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = '/api';
 
   constructor(private http: HttpClient) {}
 

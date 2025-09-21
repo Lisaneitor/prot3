@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CollaboratorRolesService {
-  private baseUrl = 'http://localhost:8080/api/collaborator-roles';
+  private baseUrl = '/api/collaborator-roles';
 
   constructor(private http: HttpClient) {}
 

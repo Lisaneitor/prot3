@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class SelfEvaluationsService {
 
-private baseUrl = '/api/self-evaluations';
+//private baseUrl = '/api/self-evaluations';
+private baseUrl = 'http://localhost:8080/api/self-evaluations';
 
   constructor(private http: HttpClient) {}
 

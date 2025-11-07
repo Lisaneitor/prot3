@@ -25,7 +25,8 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/auth';
+  //private apiUrl = '/api/auth';
+  private apiUrl = 'http://localhost:8080/api/auth';
   private token: string | null = null;
   private user: any = null;
 

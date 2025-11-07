@@ -1,30 +1,33 @@
-<nav class="navbar" [class.disabled]="isDisabled">
+<nav class="navbar">
   <div class="navbar-left">
-    <img src="/assets/img/logo_capapp.svg" class="logo" alt="Logo">
+    <img src="assets/img/logo_capapp.svg" class="logo" alt="Logo">
   </div>
 
   <ul class="navbar-menu">
     <li *ngFor="let item of menuOptions"
-        routerLinkActive="active"
-        [routerLink]="item.path">
-      {{ item.label }}
-    </li>
+      routerLinkActive="active"
+      [routerLink]="item.path"
+      [class.link-disabled]="isDisabled"
+      (click)="isDisabled ? $event.preventDefault() : null">
+    {{ item.label }}
+  </li>
   </ul>
 
-  <div class="navbar-right">
-    <span>Bienvenido, {{ username }}</span>
-    <img src="/assets/img/user_icon.svg" class="avatar" alt="Usuario">
+  <div class="navbar-right" (click)="toggleMenu()">
+  <span>Bienvenido, {{ username }}</span>
+  <img src="assets/img/user_icon.svg" class="avatar" alt="Usuario">
 
-    <div class="dropdown" *ngIf="menuOpen">
-      <ul>
-        <li (click)="vercuenta()"><img src="/assets/img/ver_cuenta.svg"> Ver cuenta</li>
-        <li *ngIf="isAnalyst">
-          <a href="/assets/template/ayuda.pdf" target="_blank" rel="noopener" class="dropdown-link">
+  <div class="dropdown" *ngIf="menuOpen">
+    <ul>
+      <li (click)="vercuenta()"><img src="assets/img/ver_cuenta.svg"> Ver cuenta</li>
+      <li *ngIf="isAnalyst">
+          <a href="/assets/template/Ayuda.pdf" target="_blank" rel="noopener" class="dropdown-link">
             <img src="/assets/img/ayuda.svg" alt=""> <span>Ayuda</span>
           </a>
         </li>
-        <li (click)="logout()"><img src="/assets/img/cerrar_sesion.svg"> Cerrar sesión</li>
-      </ul>
-    </div>
+      <li (click)="logout()"><img src="assets/img/cerrar_sesion.svg"> Cerrar sesión</li>
+    </ul>
   </div>
+</div>
+
 </nav>

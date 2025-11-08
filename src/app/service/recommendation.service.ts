@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, switchMap, map } from 'rxjs';
+import { environment } from '../enviroment/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecommendationService {
 
-  private baseUrl = '/api';
-  //private baseUrl = 'http://localhost:8080/api';
+    private base = environment.apiBaseUrl;
+    private baseUrl  = `${this.base}`;
 
   constructor(private http: HttpClient) {}
 

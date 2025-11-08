@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../enviroment/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelfEvaluationsService {
 
-private baseUrl = '/api/self-evaluations';
-//private baseUrl = 'http://localhost:8080/api/self-evaluations';
+    private base = environment.apiBaseUrl;
+    private baseUrl  = `${this.base}/self-evaluations`;
 
   constructor(private http: HttpClient) {}
 

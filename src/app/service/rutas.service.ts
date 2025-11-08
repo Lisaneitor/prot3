@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../enviroment/environment'
 
 // Define la interfaz según tu tabla
 export interface Ruta {
@@ -19,8 +20,8 @@ export interface Ruta {
 })
 export class RutasService {
 
-  private apiUrl = '/api/recommended-learning-paths';
-  //private apiUrl = 'http://localhost:8080/api/recommended-learning-paths';
+    private base = environment.apiBaseUrl;
+    private apiUrl  = `${this.base}/recommended-learning-paths`;
 
   constructor(private http: HttpClient) {}
 

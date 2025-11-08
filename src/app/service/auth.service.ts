@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../enviroment/environment'
+
 
 export type UserRole = 'COLLABORATOR' | 'ADMIN';
 
@@ -25,8 +27,9 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/auth';
-  //private apiUrl = 'http://localhost:8080/api/auth';
+  private base = environment.apiBaseUrl;
+  private apiUrl  = `${this.base}/auth`;
+  
   private token: string | null = null;
   private user: any = null;
 

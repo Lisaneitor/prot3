@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../enviroment/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CollaboratorRolesService {
-  private baseUrl = '/api/collaborator-roles';
-  //private baseUrl = 'http://localhost:8080/api/collaborator-roles';
+    private base = environment.apiBaseUrl;
+    private baseUrl  = `${this.base}/collaborator-roles`;
 
   constructor(private http: HttpClient) {}
 

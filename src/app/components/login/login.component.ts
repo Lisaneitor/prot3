@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -50,7 +51,13 @@ onLogin() {
     },
     error: (err) => {
       console.error(err);
-      alert('Credenciales inválidas');
+          Swal.fire({
+                  title: 'Error al iniciar sesión',
+                  text: 'Las credenciales ingresada son inválidas',
+                  icon: 'error',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                });
     }
   });
   

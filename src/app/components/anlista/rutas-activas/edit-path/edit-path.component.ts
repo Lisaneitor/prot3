@@ -4,6 +4,7 @@ import { RutasService } from '../../../../service/rutas.service';
 import { EditPathService } from '../../../../service/edit-path.service';
 import { Observable, from } from 'rxjs';
 import { concatMap, finalize } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 interface PathOperation {
   type: 'add' | 'remove';
@@ -66,7 +67,13 @@ private loadPathFromBackend(): void {
     },
     error: (err) => {
       console.error('Error al obtener la ruta desde el backend:', err);
-      alert('No se pudo cargar la ruta. Por favor, intente de nuevo.');
+          Swal.fire({
+                  title: 'Error al cargar información',
+                  text: 'No se pudo cargar la ruta. Por favor, intente de nuevo',
+                  icon: 'error',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                });
       this.router.navigate(['/analista/rutas']); // o '/analista/rutas-activas'
     }
   });
@@ -124,7 +131,15 @@ private loadPathFromBackend(): void {
     ];
 
     if (operations.length === 0) {
-      alert('No hay cambios por guardar.');
+                Swal.fire({
+                  title: 'Advertencia',
+                  text: 'No hay cambios por guardar',
+                  icon: 'warning',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                }).then(() => {
+        this.router.navigate(['/analista/rutas']);
+      });
       return;
     }
  this.isSaving = true;
@@ -140,7 +155,14 @@ private loadPathFromBackend(): void {
       })
     ).subscribe({
       complete: () => {
-        alert('Ruta actualizada correctamente.');
+        
+                Swal.fire({
+                  title: '¡Listo!',
+                  text: 'Ruta actualizada correctamente',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                })
                 this.originalOffers = [...this.cursos];
 
                  this.editPathService.setOriginalOffers(this.originalOffers);
@@ -149,7 +171,13 @@ private loadPathFromBackend(): void {
       },
       error: (err) => {
         console.error('Error al actualizar la ruta:', err);
-         alert(this.buildOperationErrorMessage(err));
+         Swal.fire({
+                  title: 'Error al actualizar la ruta',
+                  text: this.buildOperationErrorMessage(err),
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                });
       }
     });
   }

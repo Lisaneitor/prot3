@@ -21,16 +21,25 @@
   margin: 0;
 }
 
-.navbar.disabled {
-  pointer-events: none;   /* bloquea click, scroll, hover */
-  opacity: 0.6;           /* feedback visual */
+.navbar.navbar--locked .navbar-menu li,
+.navbar.navbar--locked .navbar-right {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* (Opcional) Si prefieres bloquear solo el menú central */
-.navbar-menu.disabled { pointer-events: none; opacity: 0.5; }
+.navbar.navbar--locked .navbar-menu li {
+  cursor: not-allowed;
+}
 
 .link-disabled {
   cursor: not-allowed;
+}
+
+.navbar-right.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .navbar-menu li {

@@ -34,11 +34,17 @@
 .cancel-btn, .save-btn {
   padding: 10px 25px;
   border-radius: 6px;
-  border: 2px solid teal;
+  border: 2px solid #01C4B3;
   font-weight: bold;
+  color: #01C4B3;
 }
 
 .save-btn {
-  background-color: teal;
+  background-color: #01C4B3;
   color: white;
+}
+
+.ruta-detalle-header{
+  display: flex;
+  justify-content: center;
 }

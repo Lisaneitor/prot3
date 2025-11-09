@@ -1,7 +1,8 @@
-import { Component, Input, OnInit  } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service';
 import { ProcessStateService } from '../../../service/process-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -9,22 +10,28 @@ import { ProcessStateService } from '../../../service/process-state.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   @Input() role: 'COLLABORATOR' | 'ADMIN' = 'COLLABORATOR';
   @Input() username: string = 'Cris';
 
   menuOptions: { label: string, path: string }[] = [];
   menuOpen = false;
   isDisabled = false;
+  private processStateSub?: Subscription;
 
   constructor(private authService: AuthService,
     private processState: ProcessStateService,
     private router: Router) {}
 
   ngOnInit(): void {
-    this.processState.isProcessing$.subscribe(
-    (val) => (this.isDisabled = val)
-  );
+    this.processStateSub = this.processState.isProcessing$.subscribe(
+      (val) => {
+        this.isDisabled = val;
+        if (val) {
+          this.menuOpen = false;
+        }
+      }
+    );
     this.menuOptions = this.role === 'COLLABORATOR'
       ? [
           { label: 'Carga de archivos', path: '/analista/archivos' },
@@ -38,16 +45,29 @@ export class NavbarComponent {
         ];
   }
 
+  ngOnDestroy(): void {
+    this.processStateSub?.unsubscribe();
+  }
+
   toggleMenu() {
+        if (this.isDisabled) {
+      return;
+    }
     this.menuOpen = !this.menuOpen;
   }
 
   logout() {
+        if (this.isDisabled) {
+      return;
+    }
     this.authService.logout();
     this.router.navigate(['/']);
   }
   
   vercuenta() {
+        if (this.isDisabled) {
+      return;
+    }
     this.router.navigate(['cuenta']);
   }
     get isAnalyst(): boolean {

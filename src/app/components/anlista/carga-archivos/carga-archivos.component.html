@@ -1,6 +1,9 @@
 <div class="upload-container">
   <h1 class="title">Información colaboradores</h1>
-
+<p class="note"><img src="assets/img/info.svg" alt="Informacion">
+        Para generar la ruta de aprendizaje, sube la lista de correos de los empleados a
+        los cuales se les desea asignar la ruta.
+      </p>
   <div
     class="upload-box"
     [class.dragging]="isDragging"
@@ -44,10 +47,7 @@
 </button>
 
   </div>
-        <p class="note"><img src="assets/img/info.svg" alt="Informacion">
-        Para generar la ruta de aprendizaje, sube la lista de correos de los empleados a
-        los cuales se les desea asignar la ruta.
-      </p>
+        
 
 <button class="btn" [disabled]="!file" [ngClass]="{'enabled': file}" (click)="handleUpload()">Cargar archivo</button>
 </div>

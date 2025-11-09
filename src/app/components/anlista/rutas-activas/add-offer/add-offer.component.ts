@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingOffersService } from '../../../../service/training-offers.service';
 import { EditPathService } from '../../../../service/edit-path.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-offer',
@@ -55,7 +56,13 @@ export class AddOfferComponent {
 
   aceptar(): void {
   if (!this.selectedOffer) {
-    alert('Selecciona una oferta');
+    Swal.fire({
+                  title: 'Error al añadir oferta formativa',
+                  text: 'No puedes añadir una oferta formativa porque aún no has seleccionado una oferta',
+                  icon: 'error',
+                  confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                });
     return;
   }
 

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CollaboratorRolesService } from '../../../service/collaborator-roles.service';
 import { UploadStateService } from '../../../service/upload-state.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-carga-archivos',
@@ -59,22 +61,39 @@ export class CargaArchivosComponent {
     fileInput.click();
   }
 
-  handleUpload(): void {
-    if (!this.file) return;
+handleUpload(): void {
+  if (!this.file) return;
 
-    this.collaboratorRolesService.uploadCsv(this.file).subscribe({
-      next: (res) => {
+  this.collaboratorRolesService.uploadCsv(this.file).subscribe({
+    next: () => {
       this.uploadStateService.markUploaded(true);
-        alert(res.message || 'Archivo cargado correctamente');
+
+      Swal.fire({
+        title: '¡Listo!',
+        text: 'Archivo CSV procesado correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Ir a rutas',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      confirmButtonColor: '#01C4B3'
+      }).then(() => {
         this.router.navigate(['/analista/generar']);
-      },
-      error: (err) => {
+      });
+    },
+    error: (err) => {
       this.uploadStateService.markUploaded(false);
-        console.error('Error al cargar archivo:', err);
-        alert(err?.error?.message || 'Error al cargar archivo');
-      }
-    });
-  }
+      console.error('Error al cargar archivo:', err);
+
+      Swal.fire({
+        title: 'Error al cargar archivo',
+        text: err?.error?.message || 'Ocurrió un error al cargar el archivo.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+      });
+    }
+  });
+}
   
 descargarPlantilla(): void {
   this.collaboratorRolesService.getCsvFormat().subscribe({
@@ -91,7 +110,14 @@ descargarPlantilla(): void {
     },
     error: (err) => {
       console.error('Error al descargar plantilla:', err);
-      alert('No se pudo obtener la plantilla. Intenta nuevamente.');
+     // alert('No se pudo obtener la plantilla. Intenta nuevamente.');
+            Swal.fire({
+        title: 'Error al descargar',
+        text: err?.error?.message || 'No se pudo obtener la plantilla. Intenta nuevamente',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+      });
     }
   });
 }

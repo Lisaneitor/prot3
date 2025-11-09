@@ -3,12 +3,38 @@
   <form [formGroup]="userForm" (ngSubmit)="guardarUsuario()">
     <div class="form-field">
       <label for="name">Nombre</label>
-      <input type="text" id="name" formControlName="name" />
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        [ngClass]="{
+          'input-invalid': userForm.controls['name'].invalid && userForm.controls['name'].touched
+        }"
+      />
+      <div class="error-message" *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">
+        <small>El nombre es obligatorio.</small>
+      </div>
     </div>
 
     <div class="form-field">
       <label for="email">Correo</label>
-      <input type="email" id="email" formControlName="email" />
+<input
+        type="email"
+        id="email"
+        formControlName="email"
+        [ngClass]="{
+          'input-invalid': userForm.controls['email'].invalid && userForm.controls['email'].touched
+        }"
+      />
+      <div class="error-message" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+        <small *ngIf="userForm.controls['email'].errors?.['required']">El correo es obligatorio.</small>
+        <small *ngIf="userForm.controls['email'].errors?.['email'] || userForm.controls['email'].errors?.['pattern']">
+          Introduzca una dirección de correo válida
+        </small>
+        <small *ngIf="userForm.controls['email'].errors?.['duplicate']">
+          El correo ya existe: {{ userForm.controls['email'].value }}
+        </small>
+      </div>
     </div>
 
     <div class="form-field password-wrapper">
@@ -36,15 +62,24 @@
 
     <div class="form-field">
       <label for="role">Rol</label>
-      <select id="role" formControlName="role">
+        <select
+          id="role"
+          formControlName="role"
+          [ngClass]="{
+            'input-invalid': userForm.controls['role'].invalid && userForm.controls['role'].touched
+          }"
+        >
         <option [value]="'ADMIN'">Administrador</option>
         <option [value]="'COLLABORATOR'">Analista</option>
       </select>
+        <div class="error-message" *ngIf="userForm.controls['role'].invalid && userForm.controls['role'].touched">
+        <small>Debe seleccionar un rol.</small>
+      </div>
     </div>
 
     <div class="form-actions">
       <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
-      <button type="submit" class="btn-submit" [disabled]="userForm.invalid">Aceptar</button>
+      <button type="submit" class="btn-submit">Aceptar</button>
     </div>
   </form>
 </div>

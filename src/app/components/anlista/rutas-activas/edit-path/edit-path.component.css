@@ -36,11 +36,11 @@
 }
 
 .cancel-btn, .save-btn, .add-btn, .back-btn {
-  padding: 10px 20px;
-  border: 2px solid white;
+  padding: 10px 25px;
   border-radius: 6px;
-  background-color: white;
-  cursor: pointer;
+  border: 2px solid #01C4B3;
+  font-weight: bold;
+  color: #01C4B3;
 }
 
 .save-btn {

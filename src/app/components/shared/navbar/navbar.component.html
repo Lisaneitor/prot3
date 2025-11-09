@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" [class.navbar--locked]="isDisabled">
   <div class="navbar-left">
     <img src="assets/img/logo_capapp.svg" class="logo" alt="Logo">
   </div>
@@ -8,16 +8,17 @@
       routerLinkActive="active"
       [routerLink]="item.path"
       [class.link-disabled]="isDisabled"
+      [attr.tabindex]="isDisabled ? -1 : 0"
       (click)="isDisabled ? $event.preventDefault() : null">
     {{ item.label }}
   </li>
   </ul>
 
-  <div class="navbar-right" (click)="toggleMenu()">
+  <div class="navbar-right" [class.disabled]="isDisabled" [attr.aria-disabled]="isDisabled" (click)="toggleMenu()">
   <span>Bienvenido, {{ username }}</span>
   <img src="assets/img/user_icon.svg" class="avatar" alt="Usuario">
 
-  <div class="dropdown" *ngIf="menuOpen">
+  <div class="dropdown" *ngIf="menuOpen && !isDisabled">
     <ul>
       <li (click)="vercuenta()"><img src="assets/img/ver_cuenta.svg"> Ver cuenta</li>
       <li *ngIf="isAnalyst">

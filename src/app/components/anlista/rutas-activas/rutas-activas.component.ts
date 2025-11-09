@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RutasService } from '../../../service/rutas.service';
 import { ViewChild, TemplateRef } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rutas-activas',
@@ -59,35 +60,6 @@ columns = [
   }
 ];
 
-/*
-  cargarRutas(): void {
-    this.rutasService.getRutas().subscribe((data) => {
-      this.rutas = data;
-    });
-  }
-
-  eliminarRuta(id: number): void {
-    if (confirm('¿Estás seguro de eliminar esta ruta?')) {
-      this.rutasService.deleteRuta(id).subscribe(() => {
-        this.rutas = this.rutas.filter(r => r.id !== id);
-      });
-    }
-  }
-
-  filtrarRutas(): Ruta[] {
-    const term = this.searchTerm.toLowerCase();
-    return this.rutas.filter(r =>
-      r.email.toLowerCase().includes(term) ||
-      r.department.toLowerCase().includes(term) ||
-      r.role.toLowerCase().includes(term) ||
-      r.routeName.toLowerCase().includes(term)
-    );
-  }
-
-  descargarRutas(): void {
-  alert('Descargar CSV — funcionalidad aún por implementar');
-}
-*/
 ngOnInit(): void {
   this.columns[2].cellTemplate = this.courseTemplate;
 
@@ -134,7 +106,13 @@ descargarRutas(): void {
     },
     error: (err) => {
       console.error('Error al descargar CSV:', err);
-      alert('Hubo un problema al descargar el archivo.');
+          Swal.fire({
+                        title: 'Error al descargar',
+                        text: 'Hubo un problema al descargar el archivo',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+                      });
     }
   });
 }

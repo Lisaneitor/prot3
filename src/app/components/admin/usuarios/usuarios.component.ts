@@ -5,6 +5,7 @@ import { AuthService } from '../../../service/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -61,12 +62,26 @@ eliminarUsuario(userId: number) {
     if (result) {
       this.userService.deleteUser(userId).subscribe({
         next: () => {
-          alert('Usuario eliminado correctamente');
+          //alert('Usuario eliminado correctamente');
+          Swal.fire({
+        title: '¡Listo!',
+        text: 'Usuario eliminado correctamente',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+      });
           this.cargarUsuarios();
         },
         error: (err) => {
           console.error('Error al eliminar usuario:', err);
-          alert('Error al eliminar usuario');
+          //alert('Error al eliminar usuario');
+                Swal.fire({
+        title: 'Error al eliminar usuario',
+        text: err?.error?.message || 'Ocurrió un error al eliminar usuario',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+      });
         }
       });
     }

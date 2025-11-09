@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TrainingOffersService } from '../../../service/training-offers.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -63,12 +64,30 @@ export class OfertaFormComponent {
 
     this.trainingOffersService.uploadCsv(this.file).subscribe({
       next: (res) => {
-        alert(res.message || 'Archivo cargado correctamente');
+        //alert(res.message || 'Archivo cargado correctamente');
+        //this.router.navigate(['/admin/oferta']);
+              Swal.fire({
+        title: '¡Listo!',
+        text: 'Archivo cargado correctament',
+        icon: 'success',
+        confirmButtonText: 'Ir a ofertas',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      confirmButtonColor: '#01C4B3'
+      }).then(() => {
         this.router.navigate(['/admin/oferta']);
+      });
       },
       error: (err) => {
         console.error('Error al cargar archivo:', err);
-        alert(err?.error?.message || 'Error al cargar archivo');
+        //alert(err?.error?.message || 'Error al cargar archivo');
+              Swal.fire({
+        title: 'Error al cargar archivo',
+        text: err?.error?.message || 'Ocurrió un error al cargar el archivo.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+      });
       }
     });
   }
@@ -100,7 +119,14 @@ descargarPlantilla(): void {
     },
     error: (err) => {
       console.error('Error al descargar plantilla:', err);
-      alert('No se pudo obtener la plantilla. Intenta nuevamente.');
+      //alert('No se pudo obtener la plantilla. Intenta nuevamente.');
+                  Swal.fire({
+              title: 'Error al descargar',
+              text: err?.error?.message || 'No se pudo obtener la plantilla. Intenta nuevamente',
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+            });
     }
   });
 }

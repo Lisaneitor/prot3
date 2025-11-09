@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import Swal from 'sweetalert2';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class UsuariosComponent implements OnInit {
 usuarios: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = '';
+  pageSizes = [5, 10, 15, 20];
+selectedPageSize = 5;
 
   columns = [
     { name: 'ID', prop: 'userId', width: 30 },
@@ -51,11 +54,19 @@ usuarios: User[] = [];
       user.role.toLowerCase().includes(term)
     );
   }
-
+/*
 eliminarUsuario(userId: number) {
   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    width: '400px',
-    data: { userId }
+    width: '420px',
+    maxWidth: '90vw',
+    autoFocus: false,
+    disableClose: true,
+    panelClass: 'confirm-dialog-panel',
+    data: {
+      userId,
+      title: 'Advertencia',
+      message: `¿Deseas eliminar al usuario con ID ${userId}?`
+    }
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -87,6 +98,42 @@ eliminarUsuario(userId: number) {
     }
   });
 }
+*/
+async eliminarUsuario(userId: number) {
+  const result = await Swal.fire({
+    title: 'Advertencia',
+    html: `¿Deseas eliminar al usuario con ID <b>${userId}</b>?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true,
+    confirmButtonColor: '#01C4B3',
+    cancelButtonColor: '#eb6464ff',
+    showLoaderOnConfirm: true,
+    allowOutsideClick: () => !Swal.isLoading(),
+    preConfirm: () => {
+      // Ejecuta el borrado y, si falla, muestra el mensaje sin cerrar el modal.
+      return firstValueFrom(this.userService.deleteUser(userId))
+        .catch((err: any) => {
+          const msg = err?.error?.message || 'Ocurrió un error al eliminar usuario';
+          Swal.showValidationMessage(msg);
+        });
+    }
+  });
+
+  if (result.isConfirmed) {
+    await Swal.fire({
+      title: '¡Listo!',
+      text: 'Usuario eliminado correctamente',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
+    });
+    this.cargarUsuarios();
+  }
+}
+
   editarUsuario(id: number) {
   this.router.navigate(['/admin/editar/usuario', id]);
 }

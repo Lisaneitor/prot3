@@ -3,6 +3,7 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .ruta-detalle-header {
@@ -10,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  width: 90%;
+  width: 75%;
 }
 
 .ruta-detalle-header h2 {
@@ -29,10 +30,10 @@
 }
 
 .footer-buttons {
-  margin-top: 20px;
+  margin-top: 4rem;
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 40%;
 }
 
 .cancel-btn, .save-btn, .add-btn, .back-btn {

@@ -7,3 +7,14 @@
 /*html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 */
+
+.confirm-dialog-panel .mat-mdc-dialog-container {
+  padding: 0;
+  border-radius: 22px;
+  overflow: visible;
+}
+
+.confirm-dialog-panel .mdc-dialog__surface {
+  border-radius: 22px;
+  overflow: visible;
+}

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RutasService } from '../../../service/rutas.service';
 import { ViewChild, TemplateRef } from '@angular/core';
 import Swal from 'sweetalert2';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-rutas-activas',
@@ -117,6 +118,7 @@ descargarRutas(): void {
   });
 }
 
+/*
 eliminarRuta(id: number): void {
   if (confirm('¿Estás seguro de eliminar esta ruta?')) {
     this.rutasService.deleteRuta(id).subscribe({
@@ -127,6 +129,44 @@ eliminarRuta(id: number): void {
       error: (err) => {
         console.error('Error al eliminar ruta:', err);
       }
+    });
+  }
+}
+  */
+ async eliminarRuta(id: number): Promise<void> {
+  const result = await Swal.fire({
+    title: 'Advertencia',
+    html: `¿Deseas eliminar la ruta con ID <b>${id}</b>?`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true,
+    confirmButtonColor: '#01C4B3',
+    cancelButtonColor: '#eb6464ff',
+    showLoaderOnConfirm: true,
+    allowOutsideClick: () => !Swal.isLoading(),
+    preConfirm: () => {
+      // Ejecuta el borrado; si falla, muestra el error sin cerrar el modal
+      return firstValueFrom(this.rutasService.deleteRuta(id))
+        .catch((err: any) => {
+          const msg = err?.error?.message || 'Ocurrió un error al eliminar la ruta';
+          Swal.showValidationMessage(msg);
+        });
+    }
+  });
+
+  if (result.isConfirmed) {
+    // Actualiza la UI como en tu versión original
+    this.rutas = this.rutas.filter(r => r.id !== id);
+    this.filteredRutas = [...this.rutas];
+
+    await Swal.fire({
+      title: '¡Listo!',
+      text: 'Ruta eliminada correctamente',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#01C4B3'
     });
   }
 }

@@ -26,7 +26,7 @@
   [headerHeight]="50"
   [footerHeight]="50"
   [rowHeight]="'auto'"
-  [limit]="5"
+  [limit]="selectedPageSize"
 >
   <ngx-datatable-column name="ID" prop="userId" [width]="60"></ngx-datatable-column>
   <ngx-datatable-column name="Nombre" prop="name" [width]="240"></ngx-datatable-column>
@@ -51,4 +51,10 @@
   </ngx-datatable-column>
 </ngx-datatable>
 
+<div class="page-size-control">
+  <label for="pageSize">Mostrar:</label>
+  <select id="pageSize" [(ngModel)]="selectedPageSize">
+    <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+  </select>
+</div>
 </div>

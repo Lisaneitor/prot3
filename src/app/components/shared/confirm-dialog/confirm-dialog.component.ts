@@ -1,6 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+export interface ConfirmDialogData {
+  userId: number;
+  title?: string;
+  message?: string;
+}
+
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
@@ -9,7 +15,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ConfirmDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { userId: number }
+    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
   ) {}
 
   cancelar(): void {

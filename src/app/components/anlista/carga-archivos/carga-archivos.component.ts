@@ -88,7 +88,7 @@ handleUpload(): void {
         title: 'Error al cargar archivo',
         text: err?.error?.message || 'Revisa el contenido del archivo',
         icon: 'error',
-        confirmButtonText: 'Aceptar',
+        confirmButtonText: 'volver',
       confirmButtonColor: '#01C4B3'
       });
     }

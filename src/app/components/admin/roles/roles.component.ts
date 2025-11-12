@@ -69,7 +69,7 @@ export class RolesComponent {
                 title: '¡Listo!',
                 text: 'Archivo cargado correctamente',
                 icon: 'success',
-                confirmButtonText: 'Ir a roles',
+                confirmButtonText: 'volver',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
       confirmButtonColor: '#01C4B3'
@@ -84,7 +84,7 @@ export class RolesComponent {
         title: 'Error al cargar archivo',
         text: err?.error?.message || 'Revisa el contenido del archivo',
         icon: 'error',
-        confirmButtonText: 'Aceptar',
+        confirmButtonText: 'volver',
       confirmButtonColor: '#01C4B3'
       });
       }

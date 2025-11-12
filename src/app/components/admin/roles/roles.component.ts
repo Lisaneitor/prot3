@@ -67,7 +67,7 @@ export class RolesComponent {
         //this.router.navigate(['/admin/oferta']);
         Swal.fire({
                 title: '¡Listo!',
-                text: 'Archivo cargado correctament',
+                text: 'Archivo cargado correctamente',
                 icon: 'success',
                 confirmButtonText: 'Ir a roles',
                 allowOutsideClick: false,
@@ -82,7 +82,7 @@ export class RolesComponent {
         //alert(err?.error?.message || 'Error al cargar archivo');
               Swal.fire({
         title: 'Error al cargar archivo',
-        text: err?.error?.message || 'Ocurrió un error al cargar el archivo.',
+        text: err?.error?.message || 'Revisa el contenido del archivo',
         icon: 'error',
         confirmButtonText: 'Aceptar',
       confirmButtonColor: '#01C4B3'

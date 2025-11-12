@@ -86,7 +86,7 @@ handleUpload(): void {
 
       Swal.fire({
         title: 'Error al cargar archivo',
-        text: err?.error?.message || 'Ocurrió un error al cargar el archivo.',
+        text: err?.error?.message || 'Revisa el contenido del archivo',
         icon: 'error',
         confirmButtonText: 'Aceptar',
       confirmButtonColor: '#01C4B3'
